@@ -3,9 +3,7 @@ FROM quay.io/spivegin/gitonly:latest AS git
 
 FROM quay.io/spivegin/golang:v1.16.3 AS builder
 WORKDIR /opt/src/src/sc.tpnfc.us/Misc/
-
-RUN ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa && git config --global user.name "quadtone" && git config --global user.email 
-"quadtone@txtsme.com"
+RUN ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa && git config --global user.name "quadtone" && git config --global user.email "quadtone@txtsme.com"
 COPY --from=git /root/.ssh /root/.ssh
 RUN ssh-keyscan -H github.com > ~/.ssh/known_hosts &&\
     ssh-keyscan -H gitlab.com >> ~/.ssh/known_hosts &&\
