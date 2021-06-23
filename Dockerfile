@@ -1,7 +1,7 @@
 # Build image
 FROM quay.io/spivegin/gitonly:latest AS git
 
-FROM quay.io/spivegin/golang:v1.16.2 AS builder
+FROM quay.io/spivegin/golang:v1.16.3 AS builder
 WORKDIR /opt/src/src/sc.tpnfc.us/Misc/
 
 RUN ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa && git config --global user.name "quadtone" && git config --global user.email 
