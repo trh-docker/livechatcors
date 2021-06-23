@@ -1,9 +1,8 @@
 # Build image
 FROM quay.io/spivegin/gitonly:latest AS git
 
-FROM quay.io/spivegin/golang:v1.15.2 AS builder
+FROM quay.io/spivegin/golang:v1.16.2 AS builder
 WORKDIR /opt/src/src/sc.tpnfc.us/Misc/livechatcors
-ADD . /opt/src/src/sc.tpnfc.us/Misc/livechatcors
 
 RUN ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa && git config --global user.name "quadtone" && git config --global user.email 
 "quadtone@txtsme.com"
@@ -38,5 +37,5 @@ RUN rm /etc/apt/sources.list.d/php.list &&\
     apt install -y nano lsof socat iftop &&\
     apt-get autoremove && apt-get autoclean &&\
     rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*    
-RUN chmod +x /opt/bin/trivia && ln -s /opt/bin/trivia /bin/trivia
-CMD ["livechatcors"]
+RUN chmod +x /opt/bin/livechatcors && ln -s /opt/bin/livechatcors /bin/livechatcors
+CMD ["livechatcors", "server"]
