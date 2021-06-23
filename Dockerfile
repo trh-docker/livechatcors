@@ -2,7 +2,7 @@
 FROM quay.io/spivegin/gitonly:latest AS git
 
 FROM quay.io/spivegin/golang:v1.16.2 AS builder
-WORKDIR /opt/src/src/sc.tpnfc.us/Misc/livechatcors
+WORKDIR /opt/src/src/sc.tpnfc.us/Misc/
 
 RUN ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa && git config --global user.name "quadtone" && git config --global user.email 
 "quadtone@txtsme.com"
@@ -32,8 +32,7 @@ RUN git clone https://sc.tpnfc.us/Misc/livechatcors.git &&\
 FROM quay.io/spivegin/tlmbasedebian
 RUN mkdir /opt/bin
 COPY --from=builder /opt/livechatcors  /opt/bin/livechatcors 
-RUN rm /etc/apt/sources.list.d/php.list &&\
-    apt update && apt upgrade -y &&\
+RUN apt update && apt upgrade -y &&\
     apt install -y nano lsof socat iftop &&\
     apt-get autoremove && apt-get autoclean &&\
     rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*    
